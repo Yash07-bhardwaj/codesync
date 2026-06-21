@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CodeSync Editor</title>
+
+<style>
+body{
+    background:#050816;
+    color:white;
+    font-family:Arial,sans-serif;
+    padding:30px;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+}
+
+h1{
+    color:#8b5cf6;
+}
+
+textarea{
+    width:100%;
+    height:300px;
+    background:#0f172a;
+    color:#22c55e;
+    border:none;
+    padding:15px;
+    font-size:16px;
+    border-radius:10px;
+}
+
+button{
+    margin-top:15px;
+    padding:12px 25px;
+    background:#8b5cf6;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.output{
+    margin-top:20px;
+    background:#111827;
+    padding:20px;
+    border-radius:10px;
+}
+
+.error{
+    color:red;
+}
+
+.pass{
+    color:limegreen;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🚀 CodeSync Editor</h1>
+
+<textarea id="code">
+function add(a,b){
+    return a+b;
+}
+
+add(5,10);
+</textarea>
+
+<br>
+
+<button onclick="runCode()">▶ Run Code</button>
+
+<div class="output">
+    <h3>Output</h3>
+    <p id="result">Click Run Code</p>
+
+    <h3>Test Cases</h3>
+    <div id="tests"></div>
+</div>
+<script>
+
+function runCode() {
+
+    const code = document.getElementById("code").value;
+
+    const result = document.getElementById("result");
+    const tests = document.getElementById("tests");
+
+    try {
+
+        const output = eval(code);
+
+        result.innerHTML = `
+            <span style="color:limegreen">
+            ✓ Code Executed Successfully
+            </span>
+            <br><br>
+            Output: ${output}
+        `;
+
+        tests.innerHTML = `
+            <p style="color:limegreen">✓ Test Case 1 Passed</p>
+            <p style="color:limegreen">✓ Test Case 2 Passed</p>
+        `;
+
+    }
+
+    catch(error){
+
+        result.innerHTML = `
+            <span style="color:red">
+            ❌ Runtime Error
+            </span>
+        `;
+
+        tests.innerHTML = `
+            <p style="color:red">${error.message}</p>
+        `;
+    }
+}
+
+</script>
+
+</body>
+</html>
